@@ -54,7 +54,7 @@ if not os.path.exists("encrypted_vectors/"):
 for root, dirs, files in os.walk(img_dir):
     for filename in files:
         image_name = filename
-        data = ('encrypted_images/'+image_name,)
+        data = ('encrypted_images/'+image_name.split(".")[0]+".png",)
         try:
            # Executing the SQL command
            cursor.execute(insert_stmt, data)
@@ -63,20 +63,19 @@ for root, dirs, files in os.walk(img_dir):
         except:
            # Rolling back in case of error
            conn.rollback()
-cursor.execute(sql_select_Query)
-records = cursor.fetchall()
-for row in records:
-    image_name = row[1].split("/")[-1]
-    #print(image_name)
-    #image_names.append(image_name)
-    e.encrypt_image(img_dir, image_name, key)
-    print("Encrypted image:",image_name)
-    features = hc.harris_corner(img_dir+image_name)
-    feature_vectors = sb.run_surf_and_bow(features)
-    #print(feature_vectors)
-    feat_vec.append(feature_vectors)
 # Closing the connection
 conn.close()
+for root, dirs, files in os.walk(img_dir):
+    for filename in files:
+        image_name = filename
+        #print(image_name)
+        #image_names.append(image_name)
+        e.encrypt_image(img_dir, image_name, key)
+        print("Encrypted image:",image_name)
+        features = hc.harris_corner(img_dir+image_name)
+        feature_vectors = sb.run_surf_and_bow(features)
+        #print(feature_vectors)
+        feat_vec.append(feature_vectors)
 print("generated vectors")
 data_vectors = np.asarray(feat_vec)
 data_vectors = np.squeeze(data_vectors)

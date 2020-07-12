@@ -42,7 +42,7 @@ def receive_query_vectors():
         filename = os.path.basename(filename)
         # convert to integer
         filesize = int(filesize)
-        client_socket.send(f"Send".encode())
+        client_socket.send("Send".encode())
         # if below code is executed, that means the sender is connected
         print(f"[+] {address} is connected.")
         progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)

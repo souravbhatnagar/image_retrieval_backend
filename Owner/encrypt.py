@@ -145,4 +145,4 @@ class Encrypt():
         for x in range(dimension):
             for y in range(dimension):
                 pix[x, y] = resultantMatrix[x][y]
-        im.save("encrypted_images/" + os.path.basename(imageName).split('.')[0] + ".jpg")
+        im.save("encrypted_images/" + os.path.basename(imageName).split('.')[0] + ".png")

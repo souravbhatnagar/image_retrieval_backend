@@ -16,7 +16,7 @@ class CloudAPISender():
         def cloud_api_sender(self, result_image):
                 # create the client socket
                 s = socket.socket()
-                print(f"[+] Connecting to 127.0.0.1:4002")
+                print("[+] Connecting to 127.0.0.1:4002")
                 s.connect(("127.0.0.1", 4006))
                 print("[+] Connected.")
                 filesize = os.path.getsize(result_image)
@@ -32,7 +32,7 @@ class CloudAPISender():
                                 data = f.read(512)
                                 if len(data) == 0:
                                     break
-                                s.send(data)
+                                s.sendall(data)
                             # update the progress bar
                             progress.update(len(data))
                 # close the socket

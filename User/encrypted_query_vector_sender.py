@@ -20,7 +20,7 @@ BUFFER_SIZE = 1024 * 4 #4KB
 def send_encrypted_query_vectors(filename):
     # create the client socket
     s = socket.socket()
-    print(f"[+] Connecting to 127.0.0.1:4002")
+    print("[+] Connecting to 127.0.0.1:4002")
     s.connect(("127.0.0.1", 4004))
     print("[+] Connected.")
     filesize = os.path.getsize(filename)

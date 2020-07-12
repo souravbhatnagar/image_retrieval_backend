@@ -13,17 +13,17 @@ from lsh import LSH
 from cloud_api_sender import CloudAPISender
 import mysql.connector
 
-#establishing the connection
-conn = mysql.connector.connect(
-   user='root', password='Sourav@98', host='127.0.0.1',
-   database='ImageRetrieval')
-#Creating a cursor object using the cursor() method
-cursor = conn.cursor()
-# Preparing SQL query to select a record from the database.
-sql_select_Query = "select * from images"
 
 class CloudMain():
     def cloud_main(self, file_count):
+        #establishing the connection
+        conn = mysql.connector.connect(
+           user='root', password='Sourav@98', host='127.0.0.1',
+           database='ImageRetrieval')
+        #Creating a cursor object using the cursor() method
+        cursor = conn.cursor()
+        # Preparing SQL query to select a record from the database.
+        sql_select_Query = "select * from images"
         with open('encrypted_vectors/feature_vectors.json') as data_file:
             feature_loaded = json.load(data_file)
         with open('encrypted_indices/indices.json') as data_file:

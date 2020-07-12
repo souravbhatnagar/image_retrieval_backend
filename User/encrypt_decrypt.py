@@ -10,8 +10,6 @@ Created on Fri Jun 26 19:59:18 2020
 import os
 import base64
 from PIL import Image
-from PIL import ImageFile
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
@@ -130,4 +128,4 @@ class EncryptDecrypt():
         for x in range(dimension):
             for y in range(dimension):
                 pix[x, y] = henonDecryptedImage[x][y]
-        im.save("decrypted_images/" + os.path.basename(imageNameEnc).split('.')[0] + ".jpg")
+        im.save("decrypted_images/" + os.path.basename(imageNameEnc).split('.')[0] + ".png")

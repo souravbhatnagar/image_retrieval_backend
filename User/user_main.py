@@ -22,7 +22,7 @@ num_of_random_vectors = 16
 hc = HarrisCorner()
 sb = SurfBow()
 e = EncryptDecrypt()
-image_name = "/home/sourav/FinalYearProject/images/MOV_1720_25.jpg"
+image_name = "/home/sourav/FinalYearProject/images/lena.bmp"
 feat_vec = []
 
 if not os.path.exists("encrypted_vectors/"):
