@@ -53,6 +53,7 @@ class LSH:
         table = {int(k):v for k,v in table.items()}
         print(table)
         random_vectors = np.array(self.model['random_vectors'])
+        print(query_vec)
         print(random_vectors)
         bin_index_bits = (query_vec.dot(random_vectors) >= 0).flatten()
 

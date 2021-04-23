@@ -18,7 +18,7 @@ SEPARATOR = "<SEPARATOR>"
 
 def receive_images():
     # device's IP address
-    SERVER_HOST = "0.0.0.0"
+    SERVER_HOST = "127.0.0.1"
     SERVER_PORT = 4001
     # receive 512 bytes each time
     BUFFER_SIZE = 512

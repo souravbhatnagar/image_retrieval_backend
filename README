@@ -1,0 +1,48 @@
+Hello Fren :)
+
+This is a simple implementation for a image retrieval system based on the IEEE paper "An Encrypted Image Retrieval Method Based on Harris Corner Optimization and LSH in Cloud Computing"
+Source: https://ieeexplore.ieee.org/document/8630983
+
+This implementation was conducted for academic purpose only hence, do not expect it to be 100% implemented as per the base paper mentioned above. That being said, it still utilizes fundamental concepts such as Harris Corner detection, Henon encryption, Surf and Bow model and LSH.
+
+Incase if you're wondering whether this code is deploy-ready for the "Cloud" or not then the short answer is, no. But hey, you can make it Cloud compatible with just minor code modification. :)
+
+Contributors:
+==============
+	Sourav
+	Dennis
+	Arvind
+	Jayant
+
+Special Thanks to:
+===================
+	Mallesha sir <3 <3
+
+System Requirement:
+====================
+OS: Linux
+Environment: Anaconda
+Programming Language: Python 3
+
+Steps for executing the code:
+==============================
+1. First and the foremost, MySQL needs to be installed in the system and then import the dump "database_dump.sql" using the following commands:
+	> mysql -u <username> -p
+	> CREATE DATABASE ImageRetrieval;
+	> mysql -u <username> -p ImageRetrieval < /path/to/database_dump.sql
+2. Start the "Cloud" server:
+	python3 image_retrieval_backend/Cloud/cloud_api_reciever.py
+3. Parallelly execute "Owner side" script to upload the images stored in image_retrieval_backend/images/ directory to the "Cloud":
+	python3 image_retrieval_backend/Owner/owner_main.py
+Note: Please update the MySQL related informations in owner_main.py
+4. After the upload is complete, you shall now test the implementation by executing the "User side" script:
+	python3 image_retrieval_backend/User/user_main.py
+Note: Update the path of the query image in user_main.py
+5. After the process is complete, you can check the result images in the image_retrieval_backend/User/decrypted_images/ directory.
+
+
+That's it.
+
+=========================
+Thank you and God bless.
+=========================

@@ -22,7 +22,8 @@ num_of_random_vectors = 16
 hc = HarrisCorner()
 sb = SurfBow()
 e = EncryptDecrypt()
-image_name = "/home/sourav/FinalYearProject/images/lena.bmp"
+#Query image path to be mentioned here
+image_name = "../images/cube0.jpg"
 feat_vec = []
 
 if not os.path.exists("encrypted_vectors/"):
@@ -35,7 +36,11 @@ if not os.path.exists("decrypted_images/"):
     os.mkdir(cwd+directory)
 
 def send():
-    features = hc.harris_corner(image_name)
+    try:
+        features = hc.harris_corner(image_name)
+    except:
+        print("Incorrect file path")
+        exit(1)
     feature_vectors = sb.run_surf_and_bow(features)
     feat_vec.append(feature_vectors)
     data_vectors = np.asarray(feat_vec)

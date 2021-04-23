@@ -19,8 +19,9 @@ import numpy as np
 import mysql.connector
 
 #establishing the connection
+#MySQL related information needs to be update here
 conn = mysql.connector.connect(
-   user='root', password='Sourav@98', host='127.0.0.1', database='ImageRetrieval')
+   user='<user>', password='<password>', host='127.0.0.1', database='ImageRetrieval')
 #Creating a cursor object using the cursor() method
 cursor = conn.cursor()
 # Preparing SQL query to INSERT a record into the database.
@@ -28,14 +29,14 @@ insert_stmt = (
    "insert into images (path)"
    "values (%s)"
 )
-sql_select_Query = "select * from images"
 key = (0.1, 0.1)
 num_of_random_vectors = 16
 hc = HarrisCorner()
 sb = SurfBow()
 e = Encrypt()
 l = LSH()
-img_dir = "/home/sourav/FinalYearProject/images/"
+#Image directory path to be mentioned here
+img_dir = "../images/"
 feat_vec=[]
 
 if not os.path.exists("encrypted_images/"):
@@ -54,6 +55,11 @@ if not os.path.exists("encrypted_vectors/"):
 for root, dirs, files in os.walk(img_dir):
     for filename in files:
         image_name = filename
+        e.encrypt_image(img_dir, image_name, key)
+        print("Encrypted image:",image_name)
+        features = hc.harris_corner(img_dir+image_name)
+        feature_vectors = sb.run_surf_and_bow(features)
+        feat_vec.append(feature_vectors)
         data = ('encrypted_images/'+image_name.split(".")[0]+".png",)
         try:
            # Executing the SQL command
@@ -65,18 +71,7 @@ for root, dirs, files in os.walk(img_dir):
            conn.rollback()
 # Closing the connection
 conn.close()
-for root, dirs, files in os.walk(img_dir):
-    for filename in files:
-        image_name = filename
-        #print(image_name)
-        #image_names.append(image_name)
-        e.encrypt_image(img_dir, image_name, key)
-        print("Encrypted image:",image_name)
-        features = hc.harris_corner(img_dir+image_name)
-        feature_vectors = sb.run_surf_and_bow(features)
-        #print(feature_vectors)
-        feat_vec.append(feature_vectors)
-print("generated vectors")
+print("Generated vectors")
 data_vectors = np.asarray(feat_vec)
 data_vectors = np.squeeze(data_vectors)
 encrypted_fv = e.encrypt_vectors(data_vectors.tobytes())
